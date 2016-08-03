@@ -39,15 +39,15 @@ namespace GeneralizationCs
 			writer.Write(getSize());
 			writer.Write(commandChar);
 			writer.Write(name);
-			writer.Write((char)0x00);
+			writer.Write(Constant.SEPERATOR);
 			writer.Write(address);
-			writer.Write((char)0x00);
+			writer.Write(Constant.SEPERATOR);
 			writer.Write(city);
-			writer.Write((char)0x00);
+			writer.Write(Constant.SEPERATOR);
 			writer.Write(state);
-			writer.Write((char)0x00);
+			writer.Write(Constant.SEPERATOR);
 			writer.Write(yearlySalary);
-			writer.Write((char)0x00);
+			writer.Write(Constant.SEPERATOR);
 			writer.Write(Constant.footer);
 		}
 	}

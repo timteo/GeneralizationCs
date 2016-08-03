@@ -28,9 +28,9 @@ namespace GeneralizationCs
 			writer.Write(getSize());
 			writer.Write(commandChar);
 			writer.Write(name);
-			writer.Write((char)0x00);
+			writer.Write(Constant.SEPERATOR);
 			writer.Write(password);
-			writer.Write((char)0x00);
+			writer.Write(Constant.SEPERATOR);
 			writer.Write(Constant.footer);
 		}
 	}

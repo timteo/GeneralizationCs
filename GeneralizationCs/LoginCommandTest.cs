@@ -9,8 +9,8 @@ namespace GeneralizationCs
 	{
 		[Test] public void SentCorrectly() {                   
 			char [] knownGood = new char [] { (char)0xde, (char)0xad, (char)50, (char)48, (char)0x01,
-                                    'b', 'a', 'b', (char)0x00,
-                                    'c', 'a', 'r', 'd', 'i', 'n', 'a', 'l', 's', (char)0x00,
+                                    'b', 'a', 'b', Constant.SEPERATOR,
+                                    'c', 'a', 'r', 'd', 'i', 'n', 'a', 'l', 's', Constant.SEPERATOR,
                                     (char)0xbe, (char)0xef };
 			LoginCommand cmd = new LoginCommand("bab", "cardinals");
 			StringWriter writer = new StringWriter();
