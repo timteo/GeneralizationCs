@@ -6,11 +6,9 @@ namespace GeneralizationCs
 
 	public class AddEmployeeCmd
 	{
-		private static char[] header = {(char)0xde, (char)0xad};
 		private static char[] commandChar = {(char)0x02};
-		private static char[] footer = {(char)0xbe, (char)0xef};
-		private const int SIZE_LENGTH = 1;
-		private const  int CMD_BYTE_LENGTH = 1;
+
+
 		private string name;
 		private string address;
 		private string city;
@@ -27,7 +25,7 @@ namespace GeneralizationCs
 		}
 
 		private int getSize() {
-			return header.Length +  SIZE_LENGTH +  CMD_BYTE_LENGTH + footer.Length +
+			return Constant.header.Length + Constant.SIZE_LENGTH + Constant.CMD_BYTE_LENGTH + Constant.footer.Length +
 				name.Length + 1 +
 				address.Length + 1 +
 				city.Length + 1 +
@@ -37,7 +35,7 @@ namespace GeneralizationCs
 
 
 		public void Write(TextWriter writer) {
-			writer.Write(header);
+			writer.Write(Constant.header);
 			writer.Write(getSize());
 			writer.Write(commandChar);
 			writer.Write(name);
@@ -50,7 +48,7 @@ namespace GeneralizationCs
 			writer.Write((char)0x00);
 			writer.Write(yearlySalary);
 			writer.Write((char)0x00);
-			writer.Write(footer);
+			writer.Write(Constant.footer);
 		}
 	}
 }
