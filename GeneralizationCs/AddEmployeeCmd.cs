@@ -1,54 +1,26 @@
-using System;
-using System.IO;
-
 namespace GeneralizationCs
 {
+    public class AddEmployeeCmd : CommandWriter
+    {
+        private string address;
+        private string city;
+        private string name;
+        private string state;
+        private string yearlySalary;
 
-	public class AddEmployeeCmd
-	{
-		private static char[] commandChar = {(char)0x02};
+        public AddEmployeeCmd(string name, string address, string city, string state, int yearlySalary)
+            : base(CommandCharacterMapping.CommandMappings[typeof (AddEmployeeCmd)])
+        {
+            this.name = name;
+            this.address = address;
+            this.city = city;
+            this.state = state;
+            this.yearlySalary = yearlySalary + "";
+        }
 
-
-		private string name;
-		private string address;
-		private string city;
-		private string state;
-		private string yearlySalary;
-
-		public AddEmployeeCmd(string name, string address, string city, string state, int yearlySalary)
-		{
-			this.name = name;
-			this.address = address;
-			this.city = city;
-			this.state = state;
-			this.yearlySalary = yearlySalary + "";
-		}
-
-		private int getSize() {
-			return Constant.Header.Length + Constant.SIZE_LENGTH + Constant.CMD_BYTE_LENGTH + Constant.Footer.Length +
-				name.Length + 1 +
-				address.Length + 1 +
-				city.Length + 1 +
-				state.Length + 1 +
-				yearlySalary.Length + 1;
-		}
-
-
-		public void Write(TextWriter writer) {
-			writer.Write(Constant.Header);
-			writer.Write(getSize());
-			writer.Write(commandChar);
-			writer.Write(name);
-			writer.Write(Constant.SEPERATOR);
-			writer.Write(address);
-			writer.Write(Constant.SEPERATOR);
-			writer.Write(city);
-			writer.Write(Constant.SEPERATOR);
-			writer.Write(state);
-			writer.Write(Constant.SEPERATOR);
-			writer.Write(yearlySalary);
-			writer.Write(Constant.SEPERATOR);
-			writer.Write(Constant.Footer);
-		}
-	}
+        protected override void AddCommandParamters()
+        {
+            AddCommandParamters(name, address, city, state, yearlySalary);
+        }
+    }
 }
