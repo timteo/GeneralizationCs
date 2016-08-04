@@ -19,7 +19,7 @@ namespace GeneralizationCs
             CommandChar = commandChar;
         }
 
-        protected void AddCommandParamters(params string[] parameters)
+        protected void AddCommandParameters(params string[] parameters)
         {
             foreach (var parameter in parameters)
             {
@@ -27,7 +27,7 @@ namespace GeneralizationCs
             }
         }
 
-        protected abstract void AddCommandParamters();
+        protected abstract void AddCommandParameters();
 
         private int GetMessageSize()
         {
@@ -46,7 +46,7 @@ namespace GeneralizationCs
 
         public void Write(TextWriter writer)
         {
-            AddCommandParamters();
+            AddCommandParameters();
 
             writer.Write(Header);
             writer.Write(GetMessageSize());

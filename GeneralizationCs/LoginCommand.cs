@@ -10,9 +10,9 @@ namespace GeneralizationCs
             LoginCredentials = loginCredentials;
         }
 
-        protected override void AddCommandParamters()
+        protected override void AddCommandParameters()
         {
-            AddCommandParamters(LoginCredentials.Name, LoginCredentials.Password);
+            AddCommandParameters(LoginCredentials.Name, LoginCredentials.Password);
         }
     }
 }

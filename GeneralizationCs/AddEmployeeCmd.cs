@@ -10,9 +10,9 @@ namespace GeneralizationCs
             this.employee = employee;
         }
 
-        protected override void AddCommandParamters()
+        protected override void AddCommandParameters()
         {
-            AddCommandParamters(employee.Name, employee.Address,
+            AddCommandParameters(employee.Name, employee.Address,
                                 employee.City, employee.State,
                                 employee.YearlySalary.ToString());
         }
