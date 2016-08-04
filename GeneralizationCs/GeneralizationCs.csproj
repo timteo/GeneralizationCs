@@ -55,6 +55,7 @@
     <Compile Include="Employee.cs" />
     <Compile Include="LoginCommand.cs" />
     <Compile Include="LoginCommandTest.cs" />
+    <Compile Include="LoginCredentials.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

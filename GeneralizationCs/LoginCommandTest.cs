@@ -16,7 +16,9 @@ namespace GeneralizationCs
                 'c', 'a', 'r', 'd', 'i', 'n', 'a', 'l', 's', (char) 0x00,
                 (char) 0xbe, (char) 0xef
             };
-            LoginCommand cmd = new LoginCommand("bab", "cardinals");
+
+            LoginCredentials loginCredentials = new LoginCredentials("bab", "cardinals");
+            LoginCommand cmd = new LoginCommand(loginCredentials);
             StringWriter writer = new StringWriter();
             cmd.Write(writer);
 

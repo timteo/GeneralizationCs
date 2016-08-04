@@ -2,20 +2,17 @@ namespace GeneralizationCs
 {
     public class LoginCommand : CommandWriter
     {
-        private string name;
-        private string password;
+        public LoginCredentials LoginCredentials { get; }
 
-
-        public LoginCommand(string name, string password)
+        public LoginCommand(LoginCredentials loginCredentials)
             : base(CommandCharacterMapping.CommandMappings[typeof (LoginCommand)])
         {
-            this.name = name;
-            this.password = password;
+            LoginCredentials = loginCredentials;
         }
 
         protected override void AddCommandParamters()
         {
-            AddCommandParamters(name, password);
+            AddCommandParamters(LoginCredentials.Name, LoginCredentials.Password);
         }
     }
 }
