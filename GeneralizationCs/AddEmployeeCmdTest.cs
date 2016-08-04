@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
 
@@ -6,30 +7,55 @@ namespace GeneralizationCs
     [TestFixture]
     public class AddEmployeeCmdTest
     {
-        [Test]
-        public void SentCorrectly()
+        public static IEnumerable<TestCaseData> GetTestEmployee() {
+            yield return new TestCaseData(new Employee("Fred Brooks", "123 My House", "Springfield", "IL", 72000));
+            yield return new TestCaseData(new Employee("Paul Creek", "840 Muse Yarn", "Flakog", "ZW", 84120));
+        }
+
+        [TestCaseSource("GetTestEmployee")]
+        public void SentCorrectly(Employee employee)
         {
-            char[] knownGood =
-            {
-                (char) 0xde, (char) 0xad, (char) 53, (char) 50, (char) 0x02,
-                'F', 'r', 'e', 'd', ' ', 'B', 'r', 'o', 'o', 'k', 's', (char) 0x00,
-                '1', '2', '3', ' ', 'M', 'y', ' ', 'H', 'o', 'u', 's', 'e', (char) 0x00,
-                'S', 'p', 'r', 'i', 'n', 'g', 'f', 'i', 'e', 'l', 'd', (char) 0x00,
-                'I', 'L', (char) 0x00,
-                '7', '2', '0', '0', '0', (char) 0x00,
-                (char) 0xbe, (char) 0xef
-            };
+            string expected = CreateExpectedMessage(employee);
 
-
-            Employee employee = new Employee("Fred Brooks", "123 My House", "Springfield", "IL", 72000);
             AddEmployeeCmd cmd = new AddEmployeeCmd(employee);
             StringWriter writer = new StringWriter();
             cmd.Write(writer);
 
-            for (int i = 0; i < knownGood.Length; i++)
-            {
-                Assert.AreEqual(knownGood[i], writer.ToString()[i], "comparison failed at byte number " + i);
-            }
+            Assert.AreEqual(expected, writer.ToString());
+        }
+
+        private string CreateExpectedMessage(Employee employee) {
+            int dataLength = employee.Name.Length + 1;
+            dataLength += employee.Address.Length + 1;
+            dataLength += employee.City.Length + 1;
+            dataLength += employee.State.Length + 1;
+            dataLength += employee.YearlySalary.ToString().Length + 1;
+
+            char[] commandChar = CommandCharacterMapping.GetCommandCharacter(typeof(AddEmployeeCmd));
+
+            int totalSize = CommandWriter.Header.Length +
+                dataLength.ToString().Length +
+                commandChar.Length +
+                CommandWriter.Footer.Length +
+                dataLength;
+
+            StringWriter sw = new StringWriter();
+            sw.Write(CommandWriter.Header);
+            sw.Write(totalSize);
+            sw.Write(commandChar);
+            sw.Write(employee.Name);
+            sw.Write(CommandWriter.SEPERATOR);
+            sw.Write(employee.Address);
+            sw.Write(CommandWriter.SEPERATOR);
+            sw.Write(employee.City);
+            sw.Write(CommandWriter.SEPERATOR);
+            sw.Write(employee.State);
+            sw.Write(CommandWriter.SEPERATOR);
+            sw.Write(employee.YearlySalary);
+            sw.Write(CommandWriter.SEPERATOR);
+            sw.Write(CommandWriter.Footer);
+
+            return sw.ToString();
         }
     }
 }

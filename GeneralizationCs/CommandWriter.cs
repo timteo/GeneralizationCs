@@ -5,13 +5,12 @@ namespace GeneralizationCs
 {
     public abstract class CommandWriter
     {
-        private const int SIZE_LENGTH = 1;
-        private const char SEPERATOR = (char) 0x00;
-        private static readonly char[] Header = {(char) 0xde, (char) 0xad};
-        private static readonly char[] Footer = {(char) 0xbe, (char) 0xef};
+        public const char SEPERATOR = (char) 0x00;
+        public static readonly char[] Header = {(char) 0xde, (char) 0xad};
+        public static readonly char[] Footer = {(char) 0xbe, (char) 0xef};
 
         public List<string> CommandParameterList { get; }
-        private char[] CommandChar { get; }
+        public char[] CommandChar { get; }
 
         public CommandWriter(char[] commandChar)
         {
@@ -31,17 +30,18 @@ namespace GeneralizationCs
 
         private int GetMessageSize()
         {
-            int totalSize = GetFixedHeadersSize();
+            int parametersSize = 0;
             foreach (var parameter in CommandParameterList)
             {
-                totalSize += parameter.Length + 1;
+                parametersSize += parameter.Length + 1;
             }
+            int totalSize = GetFixedHeadersSize(parametersSize) + parametersSize;
             return totalSize;
         }
 
-        private int GetFixedHeadersSize()
+        private int GetFixedHeadersSize(int parameterSize)
         {
-            return Header.Length + SIZE_LENGTH + CommandChar.Length + Footer.Length;
+            return Header.Length + parameterSize.ToString().Length + CommandChar.Length + Footer.Length;
         }
 
         public void Write(TextWriter writer)

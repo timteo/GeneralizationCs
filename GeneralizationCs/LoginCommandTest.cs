@@ -1,31 +1,53 @@
+using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
 
-namespace GeneralizationCs
+namespace GeneralizationCs 
 {
     [TestFixture]
     public class LoginCommandTest
     {
-        [Test]
-        public void SentCorrectly()
-        {
-            char[] knownGood =
-            {
-                (char) 0xde, (char) 0xad, (char) 50, (char) 48, (char) 0x01,
-                'b', 'a', 'b', (char) 0x00,
-                'c', 'a', 'r', 'd', 'i', 'n', 'a', 'l', 's', (char) 0x00,
-                (char) 0xbe, (char) 0xef
-            };
+        public static IEnumerable<TestCaseData> GetTestLogin() {
+            yield return new TestCaseData(new LoginCredentials("bab", "cardinals"));
+            yield return new TestCaseData(new LoginCredentials("rand", "om name"));
+        }
 
-            LoginCredentials loginCredentials = new LoginCredentials("bab", "cardinals");
+        [TestCaseSource("GetTestLogin")]
+        public void SentCorrectly(LoginCredentials loginCredentials) {
+
+            string expected = CreateExpectedMessage(loginCredentials);
+
             LoginCommand cmd = new LoginCommand(loginCredentials);
             StringWriter writer = new StringWriter();
             cmd.Write(writer);
 
-            for (int i = 0; i < knownGood.Length; i++)
-            {
-                Assert.AreEqual(knownGood[i], writer.ToString()[i], "comparison failed at byte number " + i);
-            }
+            Assert.AreEqual(expected, writer.ToString());
+
+        }
+
+        private string CreateExpectedMessage(LoginCredentials loginCredentials) {
+            int dataLength = loginCredentials.Name.Length + 1;
+            dataLength += loginCredentials.Password.Length + 1;
+
+            char[] commandChar = CommandCharacterMapping.GetCommandCharacter(typeof(LoginCommand));
+
+            int totalSize = CommandWriter.Header.Length +
+                dataLength.ToString().Length +
+                commandChar.Length +
+                CommandWriter.Footer.Length +
+                dataLength;
+
+            StringWriter sw = new StringWriter();
+            sw.Write(CommandWriter.Header);
+            sw.Write(totalSize);
+            sw.Write(commandChar);
+            sw.Write(loginCredentials.Name);
+            sw.Write(CommandWriter.SEPERATOR);
+            sw.Write(loginCredentials.Password);
+            sw.Write(CommandWriter.SEPERATOR);
+            sw.Write(CommandWriter.Footer);
+
+            return sw.ToString();
         }
     }
 }
