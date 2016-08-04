@@ -12,8 +12,8 @@ namespace GeneralizationCs
             char[] knownGood =
             {
                 (char) 0xde, (char) 0xad, (char) 50, (char) 48, (char) 0x01,
-                'b', 'a', 'b', Constant.SEPERATOR,
-                'c', 'a', 'r', 'd', 'i', 'n', 'a', 'l', 's', Constant.SEPERATOR,
+                'b', 'a', 'b', (char) 0x00,
+                'c', 'a', 'r', 'd', 'i', 'n', 'a', 'l', 's', (char) 0x00,
                 (char) 0xbe, (char) 0xef
             };
             LoginCommand cmd = new LoginCommand("bab", "cardinals");
