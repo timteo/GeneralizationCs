@@ -6,7 +6,6 @@ namespace GeneralizationCs
     public abstract class CommandWriter
     {
         private const int SIZE_LENGTH = 1;
-        private const int CMD_BYTE_LENGTH = 1;
         private const char SEPERATOR = (char) 0x00;
         private static readonly char[] Header = {(char) 0xde, (char) 0xad};
         private static readonly char[] Footer = {(char) 0xbe, (char) 0xef};
@@ -42,7 +41,7 @@ namespace GeneralizationCs
 
         private int GetFixedHeadersSize()
         {
-            return Header.Length + SIZE_LENGTH + CMD_BYTE_LENGTH + Footer.Length;
+            return Header.Length + SIZE_LENGTH + commandChar.Length + Footer.Length;
         }
 
         public void Write(TextWriter writer)
