@@ -33,10 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,19 +44,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddEmployeeCmd.cs" />
-    <Compile Include="AddEmployeeCmdTest.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="CommandCharacterMapping.cs" />
     <Compile Include="CommandWriter.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="LoginCommand.cs" />
-    <Compile Include="LoginCommandTest.cs" />
     <Compile Include="LoginCredentials.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

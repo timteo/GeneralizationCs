@@ -54,10 +54,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AddEmployeeCmdTest.cs" />
+    <Compile Include="LoginCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeneralizationCs\GeneralizationCs.csproj">
+      <Project>{2de29101-98e3-4a33-9435-7ca5095b9a00}</Project>
+      <Name>GeneralizationCs</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
