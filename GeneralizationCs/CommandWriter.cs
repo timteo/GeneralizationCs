@@ -11,12 +11,12 @@ namespace GeneralizationCs
         private static readonly char[] Footer = {(char) 0xbe, (char) 0xef};
 
         public List<string> CommandParameterList { get; }
-        private readonly char[] commandChar;
+        private char[] CommandChar { get; }
 
         public CommandWriter(char[] commandChar)
         {
             CommandParameterList = new List<string>();
-            this.commandChar = commandChar;
+            CommandChar = commandChar;
         }
 
         protected void AddCommandParamters(params string[] parameters)
@@ -41,7 +41,7 @@ namespace GeneralizationCs
 
         private int GetFixedHeadersSize()
         {
-            return Header.Length + SIZE_LENGTH + commandChar.Length + Footer.Length;
+            return Header.Length + SIZE_LENGTH + CommandChar.Length + Footer.Length;
         }
 
         public void Write(TextWriter writer)
@@ -50,7 +50,7 @@ namespace GeneralizationCs
 
             writer.Write(Header);
             writer.Write(GetMessageSize());
-            writer.Write(commandChar);
+            writer.Write(CommandChar);
 
             foreach (var parameters in CommandParameterList)
             {
