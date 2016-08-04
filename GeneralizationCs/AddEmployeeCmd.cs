@@ -2,25 +2,19 @@ namespace GeneralizationCs
 {
     public class AddEmployeeCmd : CommandWriter
     {
-        private string address;
-        private string city;
-        private string name;
-        private string state;
-        private string yearlySalary;
+        private Employee employee;
 
-        public AddEmployeeCmd(string name, string address, string city, string state, int yearlySalary)
+        public AddEmployeeCmd(Employee employee)
             : base(CommandCharacterMapping.CommandMappings[typeof (AddEmployeeCmd)])
         {
-            this.name = name;
-            this.address = address;
-            this.city = city;
-            this.state = state;
-            this.yearlySalary = yearlySalary + "";
+            this.employee = employee;
         }
 
         protected override void AddCommandParamters()
         {
-            AddCommandParamters(name, address, city, state, yearlySalary);
+            AddCommandParamters(employee.Name, employee.Address,
+                                employee.City, employee.State,
+                                employee.YearlySalary.ToString());
         }
     }
 }

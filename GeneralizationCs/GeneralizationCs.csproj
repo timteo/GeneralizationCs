@@ -53,6 +53,7 @@
     <Compile Include="CommandCharacterMapping.cs" />
     <Compile Include="CommandWriter.cs" />
     <Compile Include="Constant.cs" />
+    <Compile Include="Employee.cs" />
     <Compile Include="LoginCommand.cs" />
     <Compile Include="LoginCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
