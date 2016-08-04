@@ -25,7 +25,7 @@ namespace GeneralizationCs
 		}
 
 		private int getSize() {
-			return Constant.header.Length + Constant.SIZE_LENGTH + Constant.CMD_BYTE_LENGTH + Constant.footer.Length +
+			return Constant.Header.Length + Constant.SIZE_LENGTH + Constant.CMD_BYTE_LENGTH + Constant.Footer.Length +
 				name.Length + 1 +
 				address.Length + 1 +
 				city.Length + 1 +
@@ -35,7 +35,7 @@ namespace GeneralizationCs
 
 
 		public void Write(TextWriter writer) {
-			writer.Write(Constant.header);
+			writer.Write(Constant.Header);
 			writer.Write(getSize());
 			writer.Write(commandChar);
 			writer.Write(name);
@@ -48,7 +48,7 @@ namespace GeneralizationCs
 			writer.Write(Constant.SEPERATOR);
 			writer.Write(yearlySalary);
 			writer.Write(Constant.SEPERATOR);
-			writer.Write(Constant.footer);
+			writer.Write(Constant.Footer);
 		}
 	}
 }
