@@ -5,7 +5,7 @@ namespace GeneralizationCs
         private Employee employee;
 
         public AddEmployeeCmd(Employee employee)
-            : base(CommandCharacterMapping.CommandMappings[typeof (AddEmployeeCmd)])
+            : base(CommandCharacterMapping.GetCommandCharacter(typeof (AddEmployeeCmd)))
         {
             this.employee = employee;
         }

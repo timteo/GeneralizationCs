@@ -5,13 +5,18 @@ namespace GeneralizationCs
 {
     public class CommandCharacterMapping
     {
-        public static Dictionary<Type, char[]> CommandMappings { get; }
+        private static Dictionary<Type, char[]> commandMappings;
 
         static CommandCharacterMapping()
         {
-            CommandMappings = new Dictionary<Type, char[]>();
-            CommandMappings.Add(typeof (LoginCommand), new[] {(char) 0x01});
-            CommandMappings.Add(typeof (AddEmployeeCmd), new[] {(char) 0x02});
+            commandMappings = new Dictionary<Type, char[]>();
+            commandMappings.Add(typeof (LoginCommand), new[] {(char) 0x01});
+            commandMappings.Add(typeof (AddEmployeeCmd), new[] {(char) 0x02});
+        }
+
+        public static char[] GetCommandCharacter(Type type)
+        {
+            return commandMappings[type];
         }
     }
 }

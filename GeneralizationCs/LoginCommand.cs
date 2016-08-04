@@ -5,7 +5,7 @@ namespace GeneralizationCs
         public LoginCredentials LoginCredentials { get; }
 
         public LoginCommand(LoginCredentials loginCredentials)
-            : base(CommandCharacterMapping.CommandMappings[typeof (LoginCommand)])
+            : base(CommandCharacterMapping.GetCommandCharacter(typeof (LoginCommand)))
         {
             LoginCredentials = loginCredentials;
         }
