@@ -50,6 +50,8 @@
     <Compile Include="AddEmployeeCmd.cs" />
     <Compile Include="AddEmployeeCmdTest.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="CommandCharacterMapping.cs" />
+    <Compile Include="CommandWriter.cs" />
     <Compile Include="Constant.cs" />
     <Compile Include="LoginCommand.cs" />
     <Compile Include="LoginCommandTest.cs" />
