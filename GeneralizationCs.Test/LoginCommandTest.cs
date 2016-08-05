@@ -12,7 +12,7 @@ namespace GeneralizationCs
             yield return new TestCaseData(new LoginCredentials("rand", "om name"));
         }
 
-        [TestCaseSource("GetTestLogin")]
+        [TestCaseSource(nameof(GetTestLogin))]
         public void SentCorrectly(LoginCredentials loginCredentials) {
 
             string expected = CreateExpectedMessage(loginCredentials);

@@ -13,8 +13,8 @@ namespace GeneralizationCs
         protected override void AddCommandParameters()
         {
             AddCommandParameters(employee.Name, employee.Address,
-                                employee.City, employee.State,
-                                employee.YearlySalary.ToString());
+                                 employee.City, employee.State,
+                                 employee.YearlySalary.ToString());
         }
     }
 }

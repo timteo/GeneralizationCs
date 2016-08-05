@@ -12,7 +12,7 @@ namespace GeneralizationCs
         public List<string> CommandParameterList { get; }
         public char[] CommandChar { get; }
 
-        public CommandWriter(char[] commandChar)
+        protected CommandWriter(char[] commandChar)
         {
             CommandParameterList = new List<string>();
             CommandChar = commandChar;
@@ -41,7 +41,10 @@ namespace GeneralizationCs
 
         private int GetFixedHeadersSize(int parameterSize)
         {
-            return Header.Length + parameterSize.ToString().Length + CommandChar.Length + Footer.Length;
+            return Header.Length +
+                   parameterSize.ToString().Length +
+                   CommandChar.Length +
+                   Footer.Length;
         }
 
         public void Write(TextWriter writer)
